@@ -11,7 +11,7 @@ import {
   IconButton,
   Button,
 } from '@mui/material'
-import { FmdGood, MyLocation } from '@mui/icons-material'
+import { FmdGood, MyLocation, Search } from '@mui/icons-material'
 import CustomCard from '../../components/card/card'
 
 import config from '../../config'
@@ -107,7 +107,7 @@ const Home = () => {
     <Container fixed>
       <Grid className='my-5' container>
         <Grid item columns={{xs: 12, sm: 12, md: 12, lg: 12}}>
-          <Typography>เลือกที่อยู่ส่งด่วน</Typography>
+          <Typography className='text-cyan-500' variant='h6'>เลือกที่อยู่ส่งด่วน</Typography>
         </Grid>
       </Grid>
 
@@ -129,11 +129,14 @@ const Home = () => {
             onLoad={ref => (autocompleteRef.current = ref)}
             onPlaceChanged={onPlaceChanged}
           >
-            <InputBase
-              className='border-1 bg-white rounded-full px-5 w-1/2 h-10 shadow-lg absolute left-1/2 top-5 transform -translate-x-1/2'
-              ref={inputRef}
-              placeholder="Search for places"              
-            />
+            <div>
+              <InputBase
+                className='text-[#ABABAB] border-1 bg-white rounded-full px-10 w-1/2 h-10 shadow-lg absolute left-1/2 top-5 transform -translate-x-1/2'
+                ref={inputRef}
+                placeholder="ค้นหาที่อยู่จัดส่งสินค้า"              
+              />
+              <Search className='text-[#ABABAB] absolute left-1/4 top-7 ml-3'/>
+            </div>
           </Autocomplete>
         </GoogleMap>
       </LoadScriptNext>
@@ -141,7 +144,7 @@ const Home = () => {
       <Grid className='mt-5 justify-center' container>
         <Grid item columns={{xs: 12, sm: 12, md: 8, lg: 6}}>
           <CustomCard>
-            <Typography>ที่อยู่* (ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์)</Typography>
+            <Typography><strong>ที่อยู่* (ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์)</strong></Typography>
             <Grid className='mt-3'>
               <CustomCard>
                 <div className='flex justify-between items-center'>
@@ -159,9 +162,9 @@ const Home = () => {
         </Grid>
       </Grid>
 
-      <Grid className='mt-5' container justifyContent='center'>
-        <Grid item>
-          <Button variant="contained" onClick={() => navigate('/cart')}>ยืนยันตำแหน่ง</Button>
+      <Grid className='mt-5'>
+        <Grid columns={{xs: 12, sm: 12, md: 12, lg: 12}}>
+          <Button fullWidth disabled={!address} variant="contained" onClick={() => navigate('/cart')}>ยืนยันตำแหน่ง</Button>
         </Grid>
       </Grid>
     </Container>
