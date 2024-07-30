@@ -7,7 +7,7 @@ const initialState: LocationState = {
     lat: 0,
     lng: 0,
   },
-  address: ''
+  address: '',
 }
 
 const locationSlice = createSlice({

@@ -15,10 +15,14 @@ import CustomCard from '../../components/card/card'
 
 import { RootState } from '../../store'
 import { increaseQuantity, decreaseQuantity, clearCart } from '../../store/reducers/product-slice'
+import { setBranch } from '../../store/reducers/branch-slice'
+import { fetchBranchNearBy } from '../../services/branch'
+import { Branch, ParamsFetchBranchNearBy } from '../../interfaces'
 
 const Cart = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useSelector((state: RootState) => state.location.location)
   const address = useSelector((state: RootState) => state.location.address)
   const products = useSelector((state: RootState) => state.product.products)
 
@@ -27,6 +31,17 @@ const Cart = () => {
       navigate('/')
     }
   }, [address, navigate])
+
+  const submitOrder = async () => {
+    const params: ParamsFetchBranchNearBy = {
+      location: location,
+      page: 1,
+      size: 5,
+    }
+    const branches: Branch[] = await fetchBranchNearBy(params)
+    dispatch(setBranch(branches))
+    navigate('/select-branch')
+  }
 
   return (
     <Container>
@@ -81,7 +96,7 @@ const Cart = () => {
 
       <Grid className='mt-5 flex justify-center'>
         <Grid item columns={{xs: 12, sm: 12, md: 12, lg: 12}}>
-          <Button variant="contained" onClick={() => navigate('/select-branch')}>สั่งซื้อสินค้า</Button>
+          <Button variant="contained" onClick={submitOrder}>สั่งซื้อสินค้า</Button>
         </Grid>
       </Grid>
     </Container>
