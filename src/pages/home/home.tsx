@@ -15,7 +15,7 @@ import { FmdGood, MyLocation, Search } from '@mui/icons-material'
 import CustomCard from '../../components/card/card'
 
 import config from '../../config'
-import { Location } from '../../interfaces'
+import { Location } from '../../shared/interfaces'
 import { setAddress, setLocation } from '../../store/reducers/location-slice'
 import { RootState } from '../../store'
 

@@ -17,7 +17,7 @@ import { RootState } from '../../store'
 import { increaseQuantity, decreaseQuantity, clearCart } from '../../store/reducers/product-slice'
 import { setBranch } from '../../store/reducers/branch-slice'
 import { fetchBranchNearBy } from '../../services/branch'
-import { Branch, ParamsFetchBranchNearBy } from '../../interfaces'
+import { ParamsFetchBranchNearBy, ResponseBranch } from '../../shared/interfaces'
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -33,14 +33,21 @@ const Cart = () => {
   }, [address, navigate])
 
   const submitOrder = async () => {
+    const acerolaCherry1000mg = products.find(item => item.productId === 1) || null
+    const salmonFish1000mg = products.find(item => item.productId === 2) || null
     const params: ParamsFetchBranchNearBy = {
       location: location,
+      distance: 10000,
       page: 1,
       size: 5,
     }
-    const branches: Branch[] = await fetchBranchNearBy(params)
-    dispatch(setBranch(branches))
-    navigate('/select-branch')
+    if (acerolaCherry1000mg) params.acerolaCherry1000mg = acerolaCherry1000mg.quantity
+    if (salmonFish1000mg) params.salmonFish1000mg = salmonFish1000mg.quantity
+    const data: ResponseBranch = await fetchBranchNearBy(params)
+    if (data.branches.length > 0) {
+      dispatch(setBranch(data.branches))
+      navigate('/select-branch')
+    }
   }
 
   return (

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { LocationState, Location } from '../../interfaces'
+import { LocationState, Location } from '../../shared/interfaces'
 
 const initialState: LocationState = {
   location: {

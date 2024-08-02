@@ -5,5 +5,6 @@ declare namespace NodeJS {
       PUBLIC_URL: string
       GOOGLE_MAP_API_KEY: string
       GOOGLE_MAPS_MAP_ID: string
+      API_URL: string
   }
 }

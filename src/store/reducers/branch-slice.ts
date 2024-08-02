@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Branch, BranchState } from '../../interfaces/branch'
+import { Branch, BranchState } from '../../shared/interfaces/branch'
 
 const initialState: BranchState = {
   branches: []

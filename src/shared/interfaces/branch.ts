@@ -1,16 +1,19 @@
 import { Location } from "./location"
 
 export interface Branch {
-  site_id: number
-  site_desc: string
-  site_address: string
-  site_tel: string
-  location: BranchLocation
-  site_close_time: string
-  site_open_time: string
-  acerola_cherry_1000mg: number
-  salmon_fish_1000mg: number
+  siteId: string
+  address: string
+  description: string
+  openTime: string
+  closeTime: string
+  tel: string
   distance: number
+}
+
+export interface ResponseBranch {
+  page: number
+  totalPage: number
+  branches: Branch[]
 }
 
 export interface BranchLocation {
@@ -24,6 +27,9 @@ export interface BranchState {
 
 export interface ParamsFetchBranchNearBy {
   location: Location
+  distance: number
+  acerolaCherry1000mg?: number
+  salmonFish1000mg?: number
   page: number
   size: number
 }
